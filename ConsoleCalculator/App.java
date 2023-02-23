@@ -30,9 +30,19 @@ class App {
                     }
                     stack.pop(); // удаляем "("
                 } else {
-                    if ((token == "*" || token == "/")
-                            && (stack.peek() == "+" || stack.peek() == "-")) {
+                    if (!stack.empty()
+                            && (token.equals("+") || token.equals("-"))
+                            && (stack.peek().equals("+")
+                                || stack.peek().equals("-")
+                                || stack.peek().equals("*")
+                                || stack.peek().equals("/"))) {
                         list.add(stack.pop());
+                        System.out.println("second");
+                    } else if (!stack.empty()
+                            && (token.equals("*") || token.equals("/"))
+                            && (stack.peek().equals("*") || stack.peek().equals("/"))) {
+                        list.add(stack.pop());
+                        System.out.println("first");
                     }
 
                     stack.push(token);
@@ -52,7 +62,29 @@ class App {
         }
 
         System.out.println("Out list: " + list);
-        System.out.println("Exp list: [1, 2, +, 4, ×, 3, +]");
+        System.out.println("Exp list: [1, 2, +, 4, *, 3, +]");
+
+        Stack<Double> stack2 = new Stack<Double>();
+
+        for (String token : list) {
+            if (operators.contains(token)) {
+                double x2 = stack2.pop();
+                double x1 = stack2.pop();
+
+                switch (token) {
+                    case "+": stack2.push(x1 + x2); break;
+                    case "-": stack2.push(x1 - x2); break;
+                    case "*": stack2.push(x1 * x2); break;
+                    case "/": stack2.push(x1 / x2); break;
+                    default:
+                        System.out.println("error");
+                }
+            } else {
+                stack2.push(Double.valueOf(token));
+            }
+        }
+
+        System.out.println("\nStack2: " + stack2);
     }
 
     public static void simple() {
