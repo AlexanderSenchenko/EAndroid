@@ -2,8 +2,8 @@ package ru.eltex;
 
 public class User {
 
-    Integer id;
-    String name;
+    protected Integer id;
+    protected String name;
 
     public User() {}
 
