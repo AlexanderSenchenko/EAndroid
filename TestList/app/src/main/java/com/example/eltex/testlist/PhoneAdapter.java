@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,7 +36,21 @@ public class PhoneAdapter extends ArrayAdapter<User> {
         phone.setText(this.users[position].getPhone());
 
         ImageView imageView = (ImageView) view.findViewById(R.id.avatar);
-        imageView.setImageResource(R.drawable.user);
+
+        if (this.users[position] instanceof Developer) {
+            imageView.setImageResource(R.drawable.developer);
+        } else if (this.users[position] instanceof Manager) {
+            imageView.setImageResource(R.drawable.manager);
+        } else {
+            imageView.setImageResource(R.drawable.user);
+        }
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, users[position].toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return view;
     }

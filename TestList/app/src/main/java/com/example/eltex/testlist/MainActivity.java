@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -20,17 +22,10 @@ public class MainActivity extends AppCompatActivity {
 
         User[] users = {
                 new User("Alex1", "100"),
-                new User("Alex2", "200"),
-                new User("Alex3", "300")
+                new Developer("Alex2", "200", List.of("C", "C++")),
+                new Manager("Alex3", "300", 3)
         };
         PhoneAdapter phoneAdapter = new PhoneAdapter(this, users);
         mainList.setAdapter(phoneAdapter);
-
-//        mainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-//                Toast.makeText(getApplicationContext(), phones[position], Toast.LENGTH_SHORT).show();
-//            }
-//        });
     }
 }
