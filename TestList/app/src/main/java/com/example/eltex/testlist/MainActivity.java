@@ -18,24 +18,19 @@ public class MainActivity extends AppCompatActivity {
 
         ListView mainList = (ListView) findViewById(R.id.main_list);
 
-        String[] names = {
-                "Alex1", "Alex2", "Alex3"
+        User[] users = {
+                new User("Alex1", "100"),
+                new User("Alex2", "200"),
+                new User("Alex3", "300")
         };
-        String[] phones = {
-                "100", "200", "300"
-        };
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_list_item_activated_1,
-                names
-        );
-        mainList.setAdapter(adapter);
+        PhoneAdapter phoneAdapter = new PhoneAdapter(this, users);
+        mainList.setAdapter(phoneAdapter);
 
-        mainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Toast.makeText(getApplicationContext(), phones[position], Toast.LENGTH_SHORT).show();
-            }
-        });
+//        mainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+//                Toast.makeText(getApplicationContext(), phones[position], Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 }
