@@ -3,7 +3,7 @@ package com.example.eltex.testlist;
 import java.util.Arrays;
 import java.util.List;
 
-public class Developer extends User {
+public class Developer extends User implements CSV {
 
     private List<String> languages;
 
@@ -17,5 +17,15 @@ public class Developer extends User {
         return "Developer{" +
                 "languages=" + languages +
                 '}';
+    }
+
+    @Override
+    public String toCSV() {
+        return null;
+    }
+
+    @Override
+    public void fromCSV(String str) {
+
     }
 }

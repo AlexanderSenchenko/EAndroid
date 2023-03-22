@@ -31,6 +31,7 @@ public class User {
         this.phone = phone;
     }
 
+    // TODO: сделать абстрактным
     @Override
     public String toString() {
         return "User{" +

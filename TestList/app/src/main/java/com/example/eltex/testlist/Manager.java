@@ -1,6 +1,6 @@
 package com.example.eltex.testlist;
 
-public class Manager extends User {
+public class Manager extends User implements CSV {
 
     Integer countProjects;
 
@@ -14,5 +14,15 @@ public class Manager extends User {
         return "Manager{" +
                 "countProjects=" + countProjects +
                 '}';
+    }
+
+    @Override
+    public String toCSV() {
+        return null;
+    }
+
+    @Override
+    public void fromCSV(String str) {
+
     }
 }
