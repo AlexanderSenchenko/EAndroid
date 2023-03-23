@@ -3,6 +3,9 @@ package com.example.eltex.testlist;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +14,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.sql.SQLData;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,11 +37,11 @@ public class MainActivity extends AppCompatActivity {
 
         users = new LinkedList<>();
 
-        users.add(new Developer("Alex1", "100", List.of("Java", "Kotlin")));
-        users.add(new Developer("Alex2", "200", List.of("C", "C++")));
-        users.add(new Manager("Alex3", "300", 3));
-        users.add(dev);
-        users.add(manager);
+//        users.add(new Developer("Alex1", "100", List.of("Java", "Kotlin")));
+//        users.add(new Developer("Alex2", "200", List.of("C", "C++")));
+//        users.add(new Manager("Alex3", "300", 3));
+//        users.add(dev);
+//        users.add(manager);
 
         PhoneAdapter phoneAdapter = new PhoneAdapter(this, users);
         mainList.setAdapter(phoneAdapter);
@@ -46,5 +50,25 @@ public class MainActivity extends AppCompatActivity {
             Intent toAdd = new Intent(getApplicationContext(), AddActivity.class);
             startActivity(toAdd);
         });
+
+        SharedPreferences preferences = getSharedPreferences("INFO", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("APP_STATUS", "READY");
+        editor.commit();
+
+        Toast.makeText(this, preferences.getString("APP_STATUS", "STOP"), Toast.LENGTH_SHORT).show();
+
+        SQLiteDatabase database = new DBHelper(this).getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM users;", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+//            System.out.println("User: " + cursor.getString(1) + ": " + cursor.getString(2));
+            users.add(new Developer(cursor.getString(1), cursor.getString(2), List.of("C++")));
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        users.add(dev);
+        users.add(manager);
     }
 }

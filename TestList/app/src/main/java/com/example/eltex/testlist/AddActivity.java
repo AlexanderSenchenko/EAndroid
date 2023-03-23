@@ -4,6 +4,8 @@ import static com.example.eltex.testlist.MainActivity.users;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +23,9 @@ public class AddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+
+        SharedPreferences preferences = getSharedPreferences("INFO", MODE_PRIVATE);
+        Toast.makeText(this, preferences.getString("APP_STATUS", "STOP"), Toast.LENGTH_SHORT).show();
 
         ((RadioGroup) findViewById(R.id.radio_group)).setOnCheckedChangeListener((radioGroup, checkedId) -> {
             int visibilityDeveloperBlock = View.INVISIBLE;
@@ -65,6 +70,10 @@ public class AddActivity extends AppCompatActivity {
                     MainActivity:users.add(new Manager(name, phone, Integer.valueOf(countProjects)));
                     break;
             }
+
+            SQLiteDatabase database = new DBHelper(getApplicationContext()).getWritableDatabase();
+            database.execSQL("INSERT INTO users(name, phone) VALUES ('" + name + "', '" + phone + "')");
+            database.close();
 
 //            System.out.println(users.get(users.size() - 1).toString());
 
