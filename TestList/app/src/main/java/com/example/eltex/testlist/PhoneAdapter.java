@@ -52,13 +52,16 @@ public class PhoneAdapter extends ArrayAdapter<User> {
             @Override
             public void onClick(View view) {
                 Intent toInfo = null;
+
                 if (users.get(position) instanceof Developer) {
                     toInfo = new Intent(context, DevActivity.class);
                 } else if (users.get(position) instanceof Manager) {
                     toInfo = new Intent(context, ManagerActivity.class);
                 }
+
                 toInfo.putExtra("name", users.get(position).getName());
                 toInfo.putExtra("phone", users.get(position).getPhone());
+
                 context.startActivity(toInfo);
 
 //                Toast.makeText(context, users[position].toString(), Toast.LENGTH_SHORT).show();

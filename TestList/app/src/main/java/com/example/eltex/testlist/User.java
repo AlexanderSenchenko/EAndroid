@@ -2,12 +2,14 @@ package com.example.eltex.testlist;
 
 import androidx.annotation.NonNull;
 
-public class User {
+public abstract class User {
 
     private static Integer counter = 1;
     private Integer id;
     private String name;
     private String phone;
+
+    public User() {}
 
     public User(String name, String phone) {
         this.id = counter++;
@@ -31,13 +33,5 @@ public class User {
         this.phone = phone;
     }
 
-    // TODO: сделать абстрактным
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
-    }
+    public abstract String toString();
 }

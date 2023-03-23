@@ -25,11 +25,19 @@ public class MainActivity extends AppCompatActivity {
 
         ListView mainList = (ListView) findViewById(R.id.main_list);
 
+        Developer dev = new Developer();
+        dev.fromCSV("Alex5;500;Rust");
+
+        Manager manager = new Manager();
+        manager.fromCSV("Alex6;600;4");
+
         users = new LinkedList<>();
 
         users.add(new Developer("Alex1", "100", List.of("Java", "Kotlin")));
         users.add(new Developer("Alex2", "200", List.of("C", "C++")));
         users.add(new Manager("Alex3", "300", 3));
+        users.add(dev);
+        users.add(manager);
 
         PhoneAdapter phoneAdapter = new PhoneAdapter(this, users);
         mainList.setAdapter(phoneAdapter);

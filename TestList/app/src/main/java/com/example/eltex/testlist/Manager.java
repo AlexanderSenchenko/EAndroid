@@ -1,12 +1,18 @@
 package com.example.eltex.testlist;
 
+import java.util.Arrays;
+
 public class Manager extends User implements CSV {
 
-    Integer countProjects;
+    private Integer countProjects;
+
+    public Manager() {}
 
     public Manager(String name, String phone, Integer countProjects) {
         super(name, phone);
         this.countProjects = countProjects;
+
+        System.out.println(toCSV());
     }
 
     @Override
@@ -18,11 +24,15 @@ public class Manager extends User implements CSV {
 
     @Override
     public String toCSV() {
-        return null;
+        return getName() + ";" + getPhone() + ";" + countProjects;
     }
 
     @Override
     public void fromCSV(String str) {
+        String[] strings = str.split(";");
 
+        setName(strings[0]);
+        setPhone(strings[1]);
+        countProjects = Integer.valueOf(strings[2]);
     }
 }
