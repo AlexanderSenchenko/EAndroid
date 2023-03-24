@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 public class Manager extends User implements CSV {
 
+    public static final String TYPE = "M";
+
     private Integer countProjects;
 
     public Manager() {}
@@ -11,8 +13,16 @@ public class Manager extends User implements CSV {
     public Manager(String name, String phone, Integer countProjects) {
         super(name, phone);
         this.countProjects = countProjects;
+    }
 
-        System.out.println(toCSV());
+    public Manager(Integer id, String name, String phone, Integer countProjects) {
+        super(id, name, phone);
+        this.countProjects = countProjects;
+    }
+
+    @Override
+    public String getType() {
+        return TYPE;
     }
 
     @Override

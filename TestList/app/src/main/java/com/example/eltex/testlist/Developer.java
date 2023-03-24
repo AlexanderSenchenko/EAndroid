@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Developer extends User implements CSV {
 
+    public static final String TYPE = "D";
+
     private List<String> languages;
 
     public Developer() {}
@@ -12,8 +14,16 @@ public class Developer extends User implements CSV {
     public Developer(String name, String phone, List<String> languages) {
         super(name, phone);
         this.languages = languages;
+    }
 
-        System.out.println(toCSV());
+    public Developer(Integer id, String name, String phone, List<String> languages) {
+        super(id, name, phone);
+        this.languages = languages;
+    }
+
+    @Override
+    public String getType() {
+        return TYPE;
     }
 
     @Override

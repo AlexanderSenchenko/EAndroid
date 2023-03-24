@@ -25,8 +25,7 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
-        SharedPreferences preferences = getSharedPreferences("INFO", MODE_PRIVATE);
-        Toast.makeText(this, preferences.getString("APP_STATUS", "STOP"), Toast.LENGTH_SHORT).show();
+        testPreferences();
 
         ((RadioGroup) findViewById(R.id.radio_group)).setOnCheckedChangeListener((radioGroup, checkedId) -> {
             int visibilityDeveloperBlock = View.INVISIBLE;
@@ -53,7 +52,6 @@ public class AddActivity extends AppCompatActivity {
 
             String name = ((EditText) findViewById(R.id.name)).getText().toString();
             String phone = ((EditText) findViewById(R.id.phone)).getText().toString();
-            String type = null;
 
             if (name.isEmpty() || phone.isEmpty() || checkedRadioButtonId == -1) {
                 Toast.makeText(this, "Input data is empty", Toast.LENGTH_SHORT).show();
@@ -67,20 +65,18 @@ public class AddActivity extends AppCompatActivity {
                     String languages = ((EditText) findViewById(R.id.languages)).getText().toString();
 
                     user = new Developer(name, phone, List.of(languages));
-                    type = "D";
                     break;
 
                 case R.id.button_manager:
                     String countProjects = ((EditText) findViewById(R.id.count_projects)).getText().toString();
 
                     user = new Manager(name, phone, Integer.valueOf(countProjects));
-                    type = "M";
                     break;
             }
 
 
             SQLiteDatabase database = new DBHelper(getApplicationContext()).getWritableDatabase();
-            database.execSQL("INSERT INTO users (name, phone, type) VALUES ('" + name + "', '" + phone + "', '" + type + "')");
+            database.execSQL("INSERT INTO users (name, phone, type) VALUES ('" + name + "', '" + phone + "', '" + user.getType() + "')");
 
             Cursor cursor = database.rawQuery("SELECT last_insert_rowid();", null);
             cursor.moveToFirst();
@@ -96,5 +92,10 @@ public class AddActivity extends AppCompatActivity {
 
             finish();
         });
+    }
+
+    private void testPreferences() {
+        SharedPreferences preferences = getSharedPreferences("INFO", MODE_PRIVATE);
+        Toast.makeText(this, preferences.getString("APP_STATUS", "STOP"), Toast.LENGTH_SHORT).show();
     }
 }

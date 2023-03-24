@@ -59,12 +59,11 @@ public class PhoneAdapter extends ArrayAdapter<User> {
                     toInfo = new Intent(context, ManagerActivity.class);
                 }
 
+                toInfo.putExtra("user_id", users.get(position).getId().toString());
                 toInfo.putExtra("name", users.get(position).getName());
                 toInfo.putExtra("phone", users.get(position).getPhone());
 
                 context.startActivity(toInfo);
-
-//                Toast.makeText(context, users[position].toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
