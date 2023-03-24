@@ -38,6 +38,8 @@ public class PhoneAdapter extends ArrayAdapter<User> {
         TextView phone = (TextView) view.findViewById(R.id.phone);
         phone.setText(this.users.get(position).getPhone());
 
+        System.out.println(users.get(position).toString());
+
         ImageView imageView = (ImageView) view.findViewById(R.id.avatar);
 
         if (this.users.get(position) instanceof Developer) {
@@ -48,23 +50,20 @@ public class PhoneAdapter extends ArrayAdapter<User> {
             imageView.setImageResource(R.drawable.user);
         }
 
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent toInfo = null;
+        imageView.setOnClickListener(view1 -> {
+            Intent toInfo = null;
 
-                if (users.get(position) instanceof Developer) {
-                    toInfo = new Intent(context, DevActivity.class);
-                } else if (users.get(position) instanceof Manager) {
-                    toInfo = new Intent(context, ManagerActivity.class);
-                }
-
-                toInfo.putExtra("user_id", users.get(position).getId().toString());
-                toInfo.putExtra("name", users.get(position).getName());
-                toInfo.putExtra("phone", users.get(position).getPhone());
-
-                context.startActivity(toInfo);
+            if (users.get(position) instanceof Developer) {
+                toInfo = new Intent(context, DevActivity.class);
+            } else if (users.get(position) instanceof Manager) {
+                toInfo = new Intent(context, ManagerActivity.class);
             }
+
+            toInfo.putExtra("user_id", users.get(position).getId().toString());
+            toInfo.putExtra("name", users.get(position).getName());
+            toInfo.putExtra("phone", users.get(position).getPhone());
+
+            context.startActivity(toInfo);
         });
 
         return view;

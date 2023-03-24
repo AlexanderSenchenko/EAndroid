@@ -77,4 +77,26 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/update_button"
+            android:layout_weight="1"
+            android:text="Update"/>
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/remove_button"
+            android:layout_weight="1"
+            android:text="Remove"/>
+
+    </LinearLayout>
+
+
 </LinearLayout>

@@ -88,7 +88,7 @@ public class AddActivity extends AppCompatActivity {
 
             System.out.println("New id: " + user.getId());
 
-            MainActivity:users.add(user);
+            MainActivity.users.add(user);
 
             finish();
         });

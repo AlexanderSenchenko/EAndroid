@@ -35,6 +35,45 @@ public class MainActivity extends AppCompatActivity {
         });
 
         testPreferences();
+        System.out.println(">>> MainActivity create");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        System.out.println(">>> MainActivity start");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        System.out.println(">>> MainActivity resume");
+        System.out.println(">>>");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        System.out.println(">>> MainActivity pause");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        System.out.println(">>> MainActivity restart");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        System.out.println(">>> MainActivity stop");
+        System.out.println(">>>");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.out.println(">>> MainActivity destroy");
     }
 
     private void initUsers() {
