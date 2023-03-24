@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 
 public abstract class User {
 
-    private static Integer counter = 1;
     private Integer id;
     private String name;
     private String phone;
@@ -12,9 +11,12 @@ public abstract class User {
     public User() {}
 
     public User(String name, String phone) {
-        this.id = counter++;
         this.name = name;
         this.phone = phone;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getName() {
@@ -23,6 +25,10 @@ public abstract class User {
 
     public String getPhone() {
         return phone;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public void setName(String name) {

@@ -12,8 +12,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE users (id NUMBER, name TEXT, phone TEXT);");
-        db.execSQL("INSERT INTO USERS values (1, \"Alex1\", \"100\"), (2, \"Alex2\", 200), (3, \"Alex3\", 300);");
+        db.execSQL("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, phone TEXT NOT NULL, type TEXT CHECK( type IN ('D', 'M') ));");
+        db.execSQL("INSERT INTO users (name, phone, type) VALUES (\"Alex1\", \"100\", \"M\"), (\"Alex2\", \"200\", \"M\"), (\"Alex3\", \"300\", \"D\");");
     }
 
     @Override

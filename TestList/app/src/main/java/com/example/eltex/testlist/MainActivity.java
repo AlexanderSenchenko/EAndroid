@@ -62,8 +62,18 @@ public class MainActivity extends AppCompatActivity {
         Cursor cursor = database.rawQuery("SELECT * FROM users;", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-//            System.out.println("User: " + cursor.getString(1) + ": " + cursor.getString(2));
-            users.add(new Developer(cursor.getString(1), cursor.getString(2), List.of("C++")));
+            System.out.println("User: " + cursor.getString(1) + ": " + cursor.getString(2));
+
+            switch (cursor.getString(3)) {
+                case "D":
+                    users.add(new Developer(cursor.getString(1), cursor.getString(2), List.of("")));
+                    break;
+
+                case "M":
+                    users.add(new Manager(cursor.getString(1), cursor.getString(2), 0));
+                    break;
+            }
+
             cursor.moveToNext();
         }
         cursor.close();
